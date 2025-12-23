@@ -148,6 +148,6 @@ These top matches are returned as the final recommendations.
 ## 🌐 Live Demo
 
 🚀 **Deployed Application:**  
-👉 https://movie-recommender-deploy-1.onrender.com/
+👉 https://movie-recommender-deploy-2.onrender.com/
 
 ---
