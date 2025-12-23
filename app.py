@@ -3,6 +3,10 @@ import pickle
 import pandas as pd
 import requests
 
+import os
+API_KEY = os.getenv("TMDB_API_KEY")
+
+
 movies_list=pickle.load(open('movies_dict.pkl','rb'))
 movies=pd.DataFrame(movies_list)
 similarity=pickle.load(open('similarity.pkl','rb'))
@@ -11,7 +15,7 @@ similarity=pickle.load(open('similarity.pkl','rb'))
 def fetch_poster(movie_id):
     url = f"https://api.themoviedb.org/3/movie/{movie_id}"
     params = {
-        "api_key": "31050b1b338785a5b9e64d97a930ecf3",
+        "api_key": API_KEY,
         "language": "en-US"
     }
     try:
