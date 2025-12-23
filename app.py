@@ -6,10 +6,15 @@ import requests
 import os
 API_KEY = os.getenv("TMDB_API_KEY")
 
+@st.cache_resource
+def load_data():
+    movies_list = pickle.load(open('movies_dict.pkl', 'rb'))
+    movies = pd.DataFrame(movies_list)
+    del movies_list
+    similarity = pickle.load(open('similarity.pkl', 'rb'))
+    return movies, similarity
 
-movies_list=pickle.load(open('movies_dict.pkl','rb'))
-movies=pd.DataFrame(movies_list)
-similarity=pickle.load(open('similarity.pkl','rb'))
+movies, similarity = load_data()
 
 @st.cache_data(show_spinner=False)
 def fetch_poster(movie_id):
