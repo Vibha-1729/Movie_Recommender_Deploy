@@ -128,6 +128,6 @@ The recommendation engine is deployed as a **Streamlit web app** with:
 ## 🌐 Live Demo
 
 🚀 **Deployed Application:**  
-👉 [https://movie-recommender-deploy-2.onrender.com/](https://movie-recommender-deploy-3.onrender.com/)
+👉 [https://movie-recommender-deploy-3.onrender.com/](https://movie-recommender-deploy-3.onrender.com/)
 
 ---
