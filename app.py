@@ -10,7 +10,13 @@ from urllib.parse import quote, unquote
 # -----------------------
 # Config
 # -----------------------
-API_KEY = "31050b1b338785a5b9e64d97a930ecf3"
+
+# API_KEY = "31050b1b338785a5b9e64d97a930ecf3"
+
+import os
+
+API_KEY = os.getenv("TMDB_API_KEY")
+
 
 st.set_page_config(
     page_title="Movie Recommendation System",
