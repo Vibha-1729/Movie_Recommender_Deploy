@@ -1,3 +1,6 @@
+import torch
+torch.set_num_threads(1)
+
 from sentence_transformers import SentenceTransformer
 from sklearn.metrics.pairwise import cosine_similarity
 
@@ -38,7 +41,7 @@ def load_model():
     return SentenceTransformer("all-MiniLM-L6-v2")
 
 movies, embeddings = load_data()
-model = load_model()
+# model = load_model()
 
 # -----------------------
 # Helpers
@@ -106,6 +109,7 @@ def clickable_poster(img_url, title):
 # Semantic Search (FIXED)
 # -----------------------
 def semantic_search(query, k=5):
+    model = load_model()
     q_emb = model.encode([query])   # ✅ real query embedding
     sims = cosine_similarity(q_emb, embeddings)[0]
     top_idx = sims.argsort()[::-1][:k]
