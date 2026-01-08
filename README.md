@@ -124,10 +124,33 @@ The recommendation engine is deployed as a **Streamlit web app** with:
 
 ---
 
+## ▶️ Running the Project Locally
 
-## 🌐 Live Demo
-
-🚀 **Deployed Application:**  
-👉 [https://movie-recommender-deploy-4.onrender.com/](https://movie-recommender-deploy-4.onrender.com/)
+Follow the steps below to run the application on your local machine.
 
 ---
+
+### 1️⃣ Clone the Repository
+
+```bash
+git clone https://github.com/Vibha-1729/Movie-Recommender-System.git
+cd Movie-Recommender-System
+```
+
+### 2️⃣ Create and Activate a Virtual Environment
+
+```bash
+python -m venv venv
+venv\Scripts\activate
+```
+
+### 3️⃣ Install Dependencies
+
+```bash
+pip install streamlit sentence-transformers scikit-learn pandas numpy requests
+```
+
+### 4️⃣ Run the Streamlit Application
+```bash
+streamlit run app.py
+```
