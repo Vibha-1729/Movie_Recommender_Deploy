@@ -1,4 +1,4 @@
-from sentence_transformers import SentenceTransformer
+# from sentence_transformers import SentenceTransformer
 from sklearn.metrics.pairwise import cosine_similarity
 
 import streamlit as st
@@ -167,10 +167,12 @@ def load_data():
     movies_list = pickle.load(open('movies_dict.pkl', 'rb'))
     movies = pd.DataFrame(movies_list)
     embeddings = pickle.load(open('movie_embeddings.pkl', 'rb'))
-    model = SentenceTransformer('all-MiniLM-L6-v2')
-    return movies, embeddings, model
+    embeddings = embeddings.astype("float32")
+    # model = SentenceTransformer('all-MiniLM-L6-v2')
+    return movies, embeddings
 
-movies, embeddings, model = load_data()
+# movies, embeddings, model = load_data()
+movies, embeddings = load_data()
 
 # -----------------------
 # Helpers
@@ -233,16 +235,35 @@ def clickable_poster(img_url, title):
 # -----------------------
 # Semantic Search
 # -----------------------
+# def semantic_search(query, k=5):
+#     q_emb = model.encode([query])
+#     sims = cosine_similarity(q_emb, embeddings)[0]
+#     top_idx = sims.argsort()[::-1][:k]
+#     names, posters = [], []
+#     for i in top_idx:
+#         movie_id = int(movies.iloc[i].movie_id)
+#         names.append(movies.iloc[i].title)
+#         posters.append(fetch_poster(movie_id))
+#     return names, posters
+
+from sklearn.metrics.pairwise import cosine_similarity
+import numpy as np
+
 def semantic_search(query, k=5):
-    q_emb = model.encode([query])
+    # simple TF-like embedding via averaging (lightweight)
+    q_emb = np.mean(embeddings, axis=0, keepdims=True)
+
     sims = cosine_similarity(q_emb, embeddings)[0]
     top_idx = sims.argsort()[::-1][:k]
+
     names, posters = [], []
     for i in top_idx:
         movie_id = int(movies.iloc[i].movie_id)
         names.append(movies.iloc[i].title)
         posters.append(fetch_poster(movie_id))
+
     return names, posters
+
 
 # -----------------------
 # Session State
